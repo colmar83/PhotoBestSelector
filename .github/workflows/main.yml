@@ -16,10 +16,10 @@ jobs:
         id: project
         shell: bash
         run: |
-          ZIP_PATH=$(find . -type f -iname 'PhotoBestSelector_source.zip' -print -quit)
+          ZIP_PATH=$(find . -maxdepth 2 -type f -iname '*.zip' -print -quit)
 
           if [ -z "$ZIP_PATH" ]; then
-            echo "ERROR: PhotoBestSelector_source.zip not found!"
+            echo "ERROR: No ZIP file found!"
             echo "Files available in repository:"
             find . -maxdepth 4 -type f
             exit 1
@@ -33,6 +33,7 @@ jobs:
 
           if [ -z "$PROJECT_DIR" ]; then
             echo "ERROR: Android project not found inside ZIP!"
+            find extracted -maxdepth 5 -type f
             exit 1
           fi
 
